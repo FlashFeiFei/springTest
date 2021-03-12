@@ -1,0 +1,4 @@
+myconfig:
+  name: ly
+  age: 18
+  detail: ${myconfig.name}，年龄：${myconfig.age}

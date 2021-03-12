@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: my-spring-boot
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://154.8.142.48:3306/spring_ly?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: admin123
