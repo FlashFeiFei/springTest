@@ -103,6 +103,7 @@
                     <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
 
                     <!-- debug配置 ，设置之后还需要添加一个remote,参考地址： https://zhuanlan.zhihu.com/p/101251759-->
+<!--                    之前的idea少配置了东西，以上debug不需要配置了，直接用idea就好了-->
 <!--                    <jvmArguments>-->
 <!--                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005-->
 <!--                    </jvmArguments>-->
