@@ -45,6 +45,7 @@ public class Middleware {
 //        System.out.println(userEntity);
         Object retVal = pjp.proceed();
         System.out.println("函数处理后login中间件");
+        System.out.println(String.format("控制器的返回值:%s",retVal));
         // stop stopwatch
         return retVal;
     }

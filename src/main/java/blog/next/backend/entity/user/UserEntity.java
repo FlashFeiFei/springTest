@@ -13,6 +13,14 @@ public class UserEntity {
      * 用户名字
      */
     private String name;
+    
+    public UserEntity(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public UserEntity() {
+    }
 
     public String getName() {
         return name;
@@ -29,4 +37,6 @@ public class UserEntity {
     public void setId(int id) {
         this.id = id;
     }
+
 }
+

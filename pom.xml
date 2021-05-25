@@ -77,6 +77,18 @@
             <type>jar</type>
         </dependency>
 
+        <!-- 让@ConfigurationProperties注解方式配置的信息，在配置文件中有代码提示-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- 定义bean的方法-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -89,6 +101,18 @@
                     <fork>true</fork>
                     <!--增加jvm参数-->
                     <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+
+                    <!-- debug配置 ，设置之后还需要添加一个remote,参考地址： https://zhuanlan.zhihu.com/p/101251759-->
+<!--                    <jvmArguments>-->
+<!--                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005-->
+<!--                    </jvmArguments>-->
+                    <excludes>
+                        <exclude>
+                            <!-- 打包的时候，不要这个代码提示的jar -->
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
+                        </exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>
