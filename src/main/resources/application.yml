@@ -6,6 +6,8 @@ spring:
     url: jdbc:mysql://154.8.142.48:3306/spring_ly?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     username: root
     password: admin123
+  mvc:
+    static-path-pattern: /static/**   #所有的静态资源访问要static前缀
 #logging:
 #  file:
 #    path: /spring/log   #在当前磁盘的根路径下创建spring文件夹和里面的log文件夹；使用 spring.log作为默认文件
