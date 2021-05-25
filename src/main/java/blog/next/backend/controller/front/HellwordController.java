@@ -24,6 +24,22 @@ import java.util.stream.Collectors;
 @EnableConfigurationProperties(MyConfig.class)
 public class HellwordController {
 
+    enum Sex {
+        Man(1, "男"), WOMAN(2, "女");
+
+         private final int index;
+         private final String name;
+
+        Sex(int index, String name) {
+            this.index = index;
+            this.name = name;
+        }
+
+        public String getName(){
+            return this.name;
+        }
+    }
+
     @Autowired
     private UserEntity userEntity;
 
@@ -37,7 +53,7 @@ public class HellwordController {
 
 
     @GetMapping("log")
-    public String log(){
+    public String log() {
 
         //日志的级别
         //由低到高
@@ -64,7 +80,11 @@ public class HellwordController {
         System.out.println(myConfig.getDetail());
         System.out.println("ASDFASDF");
 
-        return "hi:" + userEntity.getName() + " 你也太厉害了吧";
+        System.out.println("字符串初始化一个枚举" + Sex.valueOf("Man"));
+        for (Sex sex : Sex.values()) {
+            System.out.println(sex + ":" + sex.getName());
+        }
+        return "hi:" + userEntity.getName() + " 你也太厉害了吧ccc" + Sex.Man;
     }
 
     @GetMapping(value = {
@@ -77,14 +97,14 @@ public class HellwordController {
         list.add(new UserEntity(1, "ly"));
         list.add(new UserEntity(2, "laughingZhu"));
         list.add(new UserEntity(3, "365"));
-        Map<Integer, UserEntity> map1 = list.stream().collect(Collectors.toMap(UserEntity::getId, itemUserEntity->itemUserEntity));
+        Map<Integer, UserEntity> map1 = list.stream().collect(Collectors.toMap(UserEntity::getId, itemUserEntity -> itemUserEntity));
         System.out.println("Result 1 : " + map1);
         System.out.println(map1.containsKey(1));
         return map1;
     }
 
     @GetMapping("/listToGroupMap")
-    public  Map<Integer,List<UserEntity>> listToGroupMap(){
+    public Map<Integer, List<UserEntity>> listToGroupMap() {
         List<UserEntity> list = new ArrayList<>();
         list.add(new UserEntity(1, "ly"));
         list.add(new UserEntity(2, "laughingZhu"));
