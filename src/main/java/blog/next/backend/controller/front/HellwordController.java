@@ -71,6 +71,7 @@ public class HellwordController {
     @MyAnnotation
     public String hi(@RequestParam String name) {
 
+        System.out.println(LoginAnnotation.class);
         System.out.println(this);
         System.out.println(request);
         System.out.println(userEntity);
@@ -86,7 +87,6 @@ public class HellwordController {
         }
         return "hi:" + userEntity.getName() + " 你也太厉害了吧ccc" + Sex.Man;
     }
-
     @GetMapping(value = {
             "/listToMap",
             "/listMapChange"
