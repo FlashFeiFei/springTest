@@ -1,6 +1,7 @@
 package blog.next.backend.controller.front;
 
 import blog.next.backend.entity.user.Persion;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

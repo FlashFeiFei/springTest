@@ -1,6 +1,7 @@
 package blog.next.backend.controller;
 
 import blog.next.backend.entity.user.Persion;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,11 @@ public class CacheController {
         System.out.println("非缓存，查询数据库");
         Persion persion = new Persion();
         persion.setAge(age);
+        return persion;
+    }
+
+    @CachePut(value = "emp",key = "#result.id")
+    public Persion updatePersion(Persion persion){
         return persion;
     }
 }
