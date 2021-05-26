@@ -2,11 +2,12 @@ package blog.next.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import java.lang.module.Configuration;
 
 @SpringBootApplication
+@EnableCaching //开启基于缓存注解
 public class BackendApplication {
 
     public static void main(String[] args) {
