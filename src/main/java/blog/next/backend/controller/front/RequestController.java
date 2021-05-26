@@ -1,5 +1,6 @@
 package blog.next.backend.controller.front;
 
+import blog.next.backend.entity.user.Persion;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -82,6 +83,18 @@ public class RequestController {
         map.put("bossAge", bossAge);
         map.put("empAge", empAge);
         return map;
+    }
+
+
+
+    //数据绑定测试
+    @PostMapping("/saveuser")
+    @ResponseBody
+    public Persion saveuser(Persion persion){
+        if(Persion.class == persion.getClass()){
+            System.out.println(".class可以直接用 == 比较是否是同一个类");
+        }
+        return persion;
     }
 
 
