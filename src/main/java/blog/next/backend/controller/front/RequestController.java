@@ -1,9 +1,12 @@
 package blog.next.backend.controller.front;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,18 +21,42 @@ public class RequestController {
         return "forward:/success";  //转发到success请求
     }
 
+    //注入的map 、model。spring boot 会注入到HttpServletRequest中的请求域中
+    @GetMapping("/params")
+    public String TestParam(Map<String,Object> map, Model model, HttpServletRequest request, HttpServletResponse response){
+
+        //map的值会最终会设置到请求域中
+        map.put("hello","world666");
+        //model的值最终会设置到请求域中
+        model.addAttribute("world","hello663");
+        request.setAttribute("message","HelloWorld");
+
+        Cookie cookie = new Cookie("c1","v1");
+        response.addCookie(cookie);
+
+        return "forward:/success";
+    }
+
     @GetMapping("/success")
     @ResponseBody
-    public Map<String, Object> success(@RequestAttribute("msg") String msg, @RequestAttribute("code") Integer code, HttpServletRequest request) {
+    public Map<String, Object> success(@RequestAttribute(value = "msg",required = false) String msg,
+                                       @RequestAttribute(value = "code",required = false) Integer code, HttpServletRequest request) {
 
         Object msg1 = request.getAttribute("msg");
         Object code1 = request.getAttribute("code");
+
+        Object hello = request.getAttribute("hello");
+        Object world = request.getAttribute("world");
+        Object message = request.getAttribute("message");
 
         Map<String, Object> map = new HashMap<>();
         map.put("reqMethod_msg", msg1);
         map.put("annotation_msg", msg);
         map.put("reqMethod_code", code1);
         map.put("annotation_code", code);
+        map.put("hello",hello);
+        map.put("world",world);
+        map.put("message",message);
 
         return map;
     }
