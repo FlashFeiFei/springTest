@@ -50,6 +50,7 @@ public class ApplicationConfig {
     public WebMvcConfigurer webMvcConfigurer(){
         return new WebMvcConfigurer() {
             @Override
+            //启动矩阵变量传参
             public void configurePathMatch(PathMatchConfigurer configurer) {
                 UrlPathHelper urlPathHelper = new UrlPathHelper();
                 urlPathHelper.setRemoveSemicolonContent(false);
