@@ -30,6 +30,7 @@ public class CacheController {
 
     @Autowired
     private RedisTemplate redisJsonTemplate;
+
     /**
      * Cacheable注解
      * 将方法的运行接口进行缓存；以后在要相同的参数，直接从缓存中获取，不调用方法
@@ -58,17 +59,18 @@ public class CacheController {
     /**
      * 存在@CachePut注解的方法一定会被执行；
      * 注解@Cacheing中，里面既包含了@Cahceble又包含了@CachePut注解，那么此方法每次调用都会被执行
+     *
      * @param persion
      * @return
      */
-    @CachePut(value = "emp",key = "#result.id")
-    public Persion updatePersion(Persion persion){
+    @CachePut(value = "emp", key = "#result.id")
+    public Persion updatePersion(Persion persion) {
         return persion;
     }
 
 
     @GetMapping("/cache/redis")
-    public Persion redisTest(){
+    public Persion redisTest() {
         Persion persion = new Persion();
         persion.setAge(13);
         persion.setBirth(new Date());
@@ -77,8 +79,24 @@ public class CacheController {
         pet.setAge(3);
         pet.setName("阿毛");
         persion.setPet(pet);
-        redisTemplate.opsForValue().set("pet-01",persion);
-        redisJsonTemplate.opsForValue().set("pet-02",persion);
+        redisTemplate.opsForValue().set("pet-01", persion);
+        redisJsonTemplate.opsForValue().set("pet-02", persion);
+        return persion;
+    }
+
+
+    //缓存
+    @GetMapping("/cache/redisJson/{age}")
+    @Cacheable(cacheNames = "redisJson", unless = "#result == null")
+    public Persion redisJson(@PathVariable("age") Integer age) {
+        Persion persion = new Persion();
+        persion.setAge(age);
+        persion.setBirth(new Date());
+        persion.setUserName("liangyu");
+        Pet pet = new Pet();
+        pet.setAge(3);
+        pet.setName("阿毛");
+        persion.setPet(pet);
         return persion;
     }
 
