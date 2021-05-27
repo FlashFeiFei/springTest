@@ -89,6 +89,23 @@ public class CacheController {
     @GetMapping("/cache/redisJson/{age}")
     @Cacheable(cacheNames = "redisJson", unless = "#result == null")
     public Persion redisJson(@PathVariable("age") Integer age) {
+        System.out.println("方法体");
+        Persion persion = new Persion();
+        persion.setAge(age);
+        persion.setBirth(new Date());
+        persion.setUserName("liangyu");
+        Pet pet = new Pet();
+        pet.setAge(3);
+        pet.setName("阿毛");
+        persion.setPet(pet);
+        return persion;
+    }
+
+
+    @GetMapping("/cache/lyCacheManage1/{age}")
+    @Cacheable(cacheManager = "lyCacheManager",cacheNames = "lyCacheManage1", unless = "#result == null")
+    public Persion lyCacheManage1(@PathVariable("age") Integer age) {
+        System.out.println("lyCacheManage1方法体");
         Persion persion = new Persion();
         persion.setAge(age);
         persion.setBirth(new Date());
