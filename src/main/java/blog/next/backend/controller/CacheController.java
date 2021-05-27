@@ -1,6 +1,7 @@
 package blog.next.backend.controller;
 
 import blog.next.backend.entity.user.Persion;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+//@CacheConfig
 public class CacheController {
 
 
@@ -36,6 +38,12 @@ public class CacheController {
         return persion;
     }
 
+    /**
+     * 存在@CachePut注解的方法一定会被执行；
+     * 注解@Cacheing中，里面既包含了@Cahceble又包含了@CachePut注解，那么此方法每次调用都会被执行
+     * @param persion
+     * @return
+     */
     @CachePut(value = "emp",key = "#result.id")
     public Persion updatePersion(Persion persion){
         return persion;
