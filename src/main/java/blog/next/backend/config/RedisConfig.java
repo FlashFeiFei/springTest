@@ -25,6 +25,10 @@ public class RedisConfig {
     }
 
 
+    /**
+     * spring boot 2.3.4 cache json序列化问题
+     * @return 注入一个RedisCacheConfiguration就行了
+     */
     @Bean
     public RedisCacheConfiguration redisCacheConfiguration() {
         return RedisCacheConfiguration.defaultCacheConfig().
