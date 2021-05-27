@@ -1,18 +1,35 @@
 package blog.next.backend.controller;
 
 import blog.next.backend.entity.user.Persion;
+import blog.next.backend.entity.user.Pet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
 
 @RestController
 //@CacheConfig
 public class CacheController {
 
 
+    //操作k-v都是字符串的
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+    //操作k-v都是对象的
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private RedisTemplate redisJsonTemplate;
     /**
      * Cacheable注解
      * 将方法的运行接口进行缓存；以后在要相同的参数，直接从缓存中获取，不调用方法
@@ -48,4 +65,21 @@ public class CacheController {
     public Persion updatePersion(Persion persion){
         return persion;
     }
+
+
+    @GetMapping("/cache/redis")
+    public Persion redisTest(){
+        Persion persion = new Persion();
+        persion.setAge(13);
+        persion.setBirth(new Date());
+        persion.setUserName("liangyu");
+        Pet pet = new Pet();
+        pet.setAge(3);
+        pet.setName("阿毛");
+        persion.setPet(pet);
+        redisTemplate.opsForValue().set("pet-01",persion);
+        redisJsonTemplate.opsForValue().set("pet-02",persion);
+        return persion;
+    }
+
 }
