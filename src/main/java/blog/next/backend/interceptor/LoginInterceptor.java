@@ -38,7 +38,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 
     /**
-     * 目标方法执行之后，视图渲染之前
+     * 目标方法执行之后，视图渲染之前,不是view返回的，不会执行postHandle
      * @param request
      * @param response
      * @param handler
@@ -47,12 +47,12 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
+        System.out.println("执行postHandle");
     }
 
 
     /**
-     * 视图渲染之后
+     * 视图渲染之后，@ResponseBody也会执行
      * @param request
      * @param response
      * @param handler
@@ -61,6 +61,7 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-
+        System.out.println("执行afterCompletion");
+        System.out.println(handler);
     }
 }
