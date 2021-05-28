@@ -37,7 +37,7 @@ public class FormController {
 
         //log变量看.class字节码，会在编译期间初始化
         log.info("上传信息: userName={}, headerImg={}, photos={}",userName,headerImg.getSize(),photos.length);
-
+        log.info(File.separator);
         if(!headerImg.isEmpty()){
             headerImg.transferTo(new File("D:\\upload\\" +  headerImg.getOriginalFilename()));
         }
