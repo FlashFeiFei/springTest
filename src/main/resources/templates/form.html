@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <title>Good Thymes Virtual Grocery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../css/gtvg.css" th:href="@{/css/gtvg.css}"/>
+</head>
+
+<body>
+
+上传页面
+
+<form th:action="@{/upload/upload}" method="post" enctype="multipart/form-data">
+
+    姓名: <input name="userName" value="zhangsan" /> <br/>
+    头像: <input type="file" name="headerImg"  /> <br/>
+    生活照: <input type="file" name="photos" multiple /> <br/>
+    <input type="submit" value="保存">
+
+</form>
+</body>
+</html>
